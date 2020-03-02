@@ -1,31 +1,50 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <component class="isMobile" :is="mobile_layout" />
+    <component class="isDesktop" :is="desktop_layout" />
+  </v-app>
 </template>
 
-<style lang="scss">
+<script>
+// const mobile_layout = "mobile-layout";
+// const desktop_layout = "desktop-layout";
+
+export default {
+  name: "App",
+
+  data() {
+    return {
+      mobile_layout: "mobile-layout",
+      desktop_layout: "desktop-layout"
+    };
+  },
+
+  // computed: {
+  //   layout() {
+  //     console.log(window.innerWidth);
+  //     return window.innerWidth < 768 ? mobile_layout : desktop_layout;
+  //   }
+  // }
+};
+</script>
+
+<style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  font-family: "Montserrat", sans-serif;
 
-#nav {
-  padding: 30px;
+  .isMobile {
+    display: none;
+  }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  @media all and (max-width: 768px) {
+    .isMobile {
+      display: block !important;
+    }
 
-    &.router-link-exact-active {
-      color: #42b983;
+    .isDesktop {
+      display: none !important;
     }
   }
 }
