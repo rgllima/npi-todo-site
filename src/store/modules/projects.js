@@ -1,41 +1,38 @@
+import ProjectRepository from "../../repository/ProjectRepository";
+
 const state = {
-  projects: [
-    {
-      _id: 1212,
-      title: "Personal",
-      description: "ag ag aggajsa ahsanj jsanj  jankas jns ans ans",
-      color: "#4f3961"
-    },
-    {
-      _id: 1213,
-      title: "Work",
-      description: "ag ag aggajsa ahsanj jsanj  jankas jns ans ans",
-      color: "#ee8972"
-    },
-    {
-      _id: 1214,
-      title: "College",
-      description: "ag ag aggajsa ahsanj jsanj  jankas jns ans ans",
-      color: "#0f4c75"
-    }
-  ]
-}
+  projects: []
+};
 
 const mutations = {
+  setProject: (state, payload) => {
+    state.projects = payload;
+  },
+
   pushProject: (state, payload) => {
-    state.projects.unshift(payload)
+    state.projects.unshift(payload);
   }
-}
+};
 
 const actions = {
   createProject({ commit }, payload) {
-    commit("pushProject", payload)
+    commit("pushProject", payload);
+  },
+
+  async fetchProjects({ commit }) {
+    await ProjectRepository.getAll()
+      .then(projects => {
+        commit("setProject", projects.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-}
+};
 
 const getters = {
   getProjects: state => state.projects
-}
+};
 
 export default {
   namespaced: true,
@@ -43,4 +40,4 @@ export default {
   getters,
   actions,
   mutations
-}
+};

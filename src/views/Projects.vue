@@ -30,6 +30,10 @@ export default {
     ...mapGetters({
       projects: "projects/getProjects"
     })
+  },
+
+  mounted() {
+    this.$store.dispatch("projects/fetchProjects");
   }
 };
 </script>
