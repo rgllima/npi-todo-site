@@ -1,14 +1,19 @@
 <template>
   <v-app>
-    <component class="isMobile" :is="mobile_layout" />
-    <component class="isDesktop" :is="desktop_layout" />
+    <template v-if="!$route.meta.public">
+      <div>
+        <component class="isMobile" :is="mobile_layout" />
+        <component class="isDesktop" :is="desktop_layout" />
+      </div>
+    </template>
+
+    <template v-else>
+      <router-view />
+    </template>
   </v-app>
 </template>
 
 <script>
-// const mobile_layout = "mobile-layout";
-// const desktop_layout = "desktop-layout";
-
 export default {
   name: "App",
 
@@ -17,14 +22,7 @@ export default {
       mobile_layout: "mobile-layout",
       desktop_layout: "desktop-layout"
     };
-  },
-
-  // computed: {
-  //   layout() {
-  //     console.log(window.innerWidth);
-  //     return window.innerWidth < 768 ? mobile_layout : desktop_layout;
-  //   }
-  // }
+  }
 };
 </script>
 
