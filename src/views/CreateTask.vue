@@ -146,7 +146,7 @@ export default {
 
       if (formStatusMsg.length === 0) {
         let payload = {
-          _id: this.id,
+          id: this.id,
           title: this.title,
           description: this.description,
           checked: this.checked,
@@ -197,7 +197,7 @@ export default {
     let { edit } = this.$route.query;
     if (edit) {
       let task = this.$store["getters"]["tasks/getSelectedTask"];
-      this.id = task._id;
+      this.id = task.id;
       this.title = task.title;
       this.description = task.description;
       this.project = task.project;

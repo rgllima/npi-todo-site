@@ -34,6 +34,10 @@ export default {
     ...mapGetters({
       tasks: "tasks/getTasks"
     })
+  },
+
+  mounted() {
+    this.$store.dispatch("tasks/fetchTasks");
   }
 };
 </script>
