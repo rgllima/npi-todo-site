@@ -1,26 +1,33 @@
 <template>
-  <div class="login">
+  <div class="register">
     <v-container class="background" fluid>
       <div class="box">
         <v-col>
-          <h3>Entrar na Conta</h3>
+          <h3>Criar uma Conta</h3>
           <v-text-field
             type="email"
             v-model="user.email"
-            :error="triedLogin && !user.email"
-            label="Email"
+            :error="triedRegister && !user.email"
+            label="E-mail"
+          ></v-text-field>
+
+          <v-text-field
+            type="text"
+            v-model="user.name"
+            :error="triedRegister && !user.name"
+            label="Nome"
           ></v-text-field>
 
           <v-text-field
             type="password"
             v-model="user.password"
-            :error="triedLogin &&!user.password"
+            :error="triedRegister &&!user.password"
             label="Senha"
           ></v-text-field>
 
           <div class="buttons">
-            <v-btn class="button" color="#a0db8e" :loading="loading" @click="doLogin">Entrar</v-btn>
-            <v-btn class="button" @click="$router.push('/register')">Criar Conta</v-btn>
+            <v-btn class="button" color="#a0db8e" :loading="loading" @click="doRegister">Criar COnta</v-btn>
+            <v-btn class="button" @click="$router.push('/login')">Já Tenho Conta</v-btn>
           </div>
         </v-col>
       </div>
@@ -32,18 +39,18 @@
 export default {
   data() {
     return {
-      user: { email: "", password: "" },
-      triedLogin: false,
+      user: { name: "", email: "", password: "" },
+      triedRegister: false,
       loading: false
     };
   },
 
   methods: {
-    async doLogin() {
+    async doRegister() {
       this.loading = true;
-      this.triedLogin = true;
+      this.triedRegister = true;
 
-      await this.$store.dispatch("auth/login", this.user);
+      await this.$store.dispatch("auth/register", this.user);
 
       this.loading = false;
     }
@@ -52,13 +59,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.login
+.register
   height: 100vh
   min-height: 500px
 
   .background
     height: 100%
-    background-image: url("../assets/login-background.jpg")
+    background-image: url("../assets/register-background.jpg")
     background-size: cover
     display: flex
     justify-content: center
@@ -66,7 +73,7 @@ export default {
 
     .box
       width: 300px
-      height: 300px
+      height: 380px
       background: white
       border-radius: 10px
       text-align: center

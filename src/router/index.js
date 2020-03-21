@@ -9,6 +9,22 @@ const routes = [
     redirect: "/tasks"
   },
   {
+    path: "/login",
+    name: "Login",
+    meta: {
+      public: true
+    },
+    component: () => import("../views/Login.vue")
+  },
+  {
+    path: "/register",
+    name: "Register",
+    meta: {
+      public: true
+    },
+    component: () => import("../views/Register.vue")
+  },
+  {
     path: "/tasks",
     name: "Tasks",
     meta: {
@@ -55,14 +71,6 @@ const routes = [
       requiresAuth: true
     },
     component: () => import("../views/Settings.vue")
-  },
-  {
-    path: "/login",
-    name: "Login",
-    meta: {
-      public: true
-    },
-    component: () => import("../views/Login.vue")
   }
 ];
 

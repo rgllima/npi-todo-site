@@ -29,7 +29,6 @@ const actions = {
   async fetchProjects({ commit }) {
     await ProjectRepository.findAll()
       .then(res => {
-        console.log(res.data)
         commit("setProject", res.data);
       })
       .catch(err => {
@@ -40,7 +39,6 @@ const actions = {
   async updateOne({ commit, dispatch }, payload) {
     await ProjectRepository.findByIdAndUpdate(payload["id"], payload)
       .then(res => {
-        console.log(res);
         dispatch("fetchProjects");
       })
       .catch(err => {
